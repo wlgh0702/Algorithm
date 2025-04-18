@@ -5,19 +5,14 @@ class Solution {
         Map<Character, Integer> magazineMap = new HashMap<>();
 
         for(char c : magazine.toCharArray()) {
-            if(magazineMap.get(c) != null) {
-                magazineMap.put(c, magazineMap.get(c) + 1);
-            } else {
-                magazineMap.put(c, 1);
-            }
+            magazineMap.put(c, magazineMap.getOrDefault(c, 0) + 1);
         }
 
         for(char c : ransomNote.toCharArray()) {
-            if(magazineMap.get(c) != null && magazineMap.get(c) != 0) {
-                magazineMap.put(c, magazineMap.get(c) - 1);
-            } else {
+            if(!magazineMap.containsKey(c) || magazineMap.get(c) <= 0) {
                 return false;
             }
+            magazineMap.put(c, magazineMap.get(c) - 1);
         }
         return true;
     }
