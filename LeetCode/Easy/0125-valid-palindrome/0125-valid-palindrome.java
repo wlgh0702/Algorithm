@@ -5,7 +5,7 @@ class Solution {
         if(lower.length() <= 1) return true;
         
         int j = lower.length() - 1;
-        for(int i = 0; i < s.length() / 2; i++) {
+        for(int i = 0; i < lower.length() / 2; i++) {
             if(lower.charAt(i) != lower.charAt(j - i)) {
                 return false;
             }
