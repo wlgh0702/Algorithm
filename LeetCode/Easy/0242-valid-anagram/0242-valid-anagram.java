@@ -2,25 +2,20 @@ import java.util.*;
 
 class Solution {
     public boolean isAnagram(String s, String t) {
-        Map<Character, Integer> map = new HashMap<>();
+        if(s.length() != t.length()) return false;
+
+        int[] alphabet = new int[26];
+
         for(char c : s.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+            alphabet[c - 'a'] += 1;
         }
 
         for(char c : t.toCharArray()) {
-            if(map.get(c) == null) {
-                return false;
-            } else if(map.get(c) > 1) {
-                map.put(c, map.get(c) - 1);
-            } else {
-                map.remove(c);
-            }
+            if(alphabet[c - 'a'] == 0) return false;
+
+            alphabet[c - 'a'] -= 1;
         }
 
-        if(map.size() == 0) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 }
