@@ -2,31 +2,25 @@ import java.util.*;
 
 class Solution {
     public int reverse(int x) {
-        if(x == 0) return 0;
+        int reverse = 0;
+        
+        while(x != 0) {
+            int digit = x % 10;
+            x /= 10;
 
-        StringBuilder ans = new StringBuilder();
-        boolean isAdded = false;
-        if(x < 0) {
-            ans.append("-");
-            x = -x;
-        }
-        String number = String.valueOf(x);
-        for(int i = number.length() - 1; i >= 0; i--) {
-            if(number.charAt(i) - '0' == 0 && !isAdded) {
-                continue;
-            } else {
-                ans.append(number.charAt(i) - '0');
-                isAdded = true;
-            }
+            if(reverse > Integer.MAX_VALUE / 10 || 
+                (reverse > Integer.MAX_VALUE / 10 && digit > 7)) {
+                    return 0;
+                }
+            
+            if(reverse < Integer.MIN_VALUE / 10 ||
+                (reverse < Integer.MIN_VALUE / 10 && digit < -8)) {
+                    return 0;
+                }
+
+            reverse = reverse * 10 + digit;
         }
 
-        int answer = 0;
-
-        try {
-            answer = Integer.parseInt(ans.toString());
-        } catch (NumberFormatException e) {
-            return answer;
-        }
-        return answer;
+        return reverse;
     }
 }
