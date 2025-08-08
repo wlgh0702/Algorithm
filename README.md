@@ -6,17 +6,20 @@ This repo contains my solutions to various problems from [LeetCode](https://leet
 ## 📁 Folder Structure
 
 ```
-leetcode/
-├── easy/
-│   └── [0001]_Two_Sum.java
-├── medium/
-│   └── [0015]_3Sum.java
-├── hard/
-│   └── [0023]_Merge_k_Sorted_Lists.java
+LeetCode/
+├── Easy/
+│   └── 0001-two-sum/
+│     └── 0001-two-sum.java
+├── Medium/
+│   └── 0007-reverse-integer/
+│     └── 0007-reverse-integer.java
+├── Hard/
+│   └── 0023-merge-k-sorted-lists
+│     └── 0023-merge-k-sorted-lists
 ```
 
-- Problems are categorized by difficulty: `easy`, `medium`, and `hard`
-- File naming convention: `[problem_number]_[Problem_Title].java`
+- Problems are categorized by difficulty: `Easy`, `Medium`, and `Hard`
+- File naming convention: `problem_number-Problem_Title-.java`
 
 ## 🛠️ Tech Stack
 
@@ -35,15 +38,8 @@ leetcode/
 
 ## ✅ Example Problems
 
-- [1. Two Sum](./leetcode/easy/[0001]_Two_Sum.java)
-- [15. 3Sum](./leetcode/medium/[0015]_3Sum.java)
-- [23. Merge k Sorted Lists](./leetcode/hard/[0023]_Merge_k_Sorted_Lists.java)
-
-## 💡 Commit Convention
-
-- `feat`: Add new problem solution  
-- `refactor`: Improve existing solution  
-- `docs`: Update README or add comments  
+- [1. Two Sum](./LeetCode/Easy/0001-two-sum/0001-two-sum.java)
+- [15. 3Sum](./LeetCode/Medium/0007-reverse-integer/0007-reverse-integer.java)
 
 ## 🚀 Goal
 
