@@ -1,22 +1,32 @@
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        List<Integer> numbers = new ArrayList<>();
+        ListNode slow = head;
+        ListNode fast = head;
 
-        while(head != null) {
-            numbers.add(head.val);
-            head = head.next;
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
         }
 
-        int start = 0;
-        int end = numbers.size() - 1;
+        ListNode prev = null;
+        while(slow != null) {
+            ListNode temp = slow.next;
+            slow.next = prev;
+            prev = slow;
+            slow = temp;
+        }
 
-        while(start < end) {
-            if(numbers.get(start) != numbers.get(end)) {
+        ListNode first = head;
+        ListNode second = prev;
+        
+        while(second != null) {
+            if(first.val != second.val) {
                 return false;
             }
-            start++;
-            end--;
+            first = first.next;
+            second = second.next;
         }
+
         return true;
     }
 }
