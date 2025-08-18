@@ -17,17 +17,16 @@ import java.util.*;
 
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-        return isMirror(root.left, root.right);
+        return helper(root.left,root.right);
     }
-
-    private boolean isMirror(TreeNode left, TreeNode right) {
-        if(left == null && right == null) return true;
-
-        if(left == null || right == null) return false;
-
-        boolean boolOne = isMirror(left.left, right.right);
-        boolean boolTwo = isMirror(left.right, right.left);
-
-        return left.val == right.val && boolOne && boolTwo;
+    public boolean helper(TreeNode t1, TreeNode t2) {
+        if(t1==null && t2==null)
+            return true;
+        if(t1==null || t2==null)
+            return false;
+        //3rd case t1!=null and t2!=null
+        return t1.val==t2.val && 
+            helper(t1.left,t2.right) && 
+            helper(t1.right,t2.left);
     }
 }
