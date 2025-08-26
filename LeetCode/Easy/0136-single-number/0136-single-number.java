@@ -2,10 +2,10 @@ import java.util.*;
 
 class Solution {
     public int singleNumber(int[] nums) {
-        int answer = 0;
+        int ans = 0;
         for(int i : nums) {
-            answer = answer ^ i;
+            ans = ans ^ i;
         }
-        return answer;
+        return ans;
     }
 }
