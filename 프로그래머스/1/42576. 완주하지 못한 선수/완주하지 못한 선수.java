@@ -11,9 +11,9 @@ class Solution {
             partMap.put(person, partMap.get(person) - 1);
         }
         
-        for (Map.Entry<String, Integer> entry : partMap.entrySet()) {
-            if (entry.getValue() == 1) {
-                answer = entry.getKey();
+        for(String key : partMap.keySet()) {
+            if(partMap.get(key) == 1) {
+                answer = key;
                 break;
             }
         }
