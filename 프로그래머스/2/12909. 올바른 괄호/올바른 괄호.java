@@ -2,21 +2,28 @@ import java.util.*;
 
 class Solution {
     boolean solution(String s) {
-        
-        Stack<Character> stack = new Stack<>();
-        
-        for(int i = 0; i < s.length(); i++) {
-            stack.push(s.charAt(i));
-            if(s.charAt(i) == ')' && stack.size() > 1) {
-                stack.pop();
-                stack.pop();
-            }
-        }
-        
-        if(stack.size() == 0) {
-            return true;
-        } else {
+        if(s.charAt(0) == ')' || s.charAt(s.length() - 1) == '(') {
             return false;
         }
+
+       Queue<Character> queue = new ArrayDeque<>();
+
+       for(int i = 0; i < s.length(); i++) {
+           if(!queue.isEmpty()) {
+               if(s.charAt(i) == '(') {
+                   queue.add(s.charAt(i));
+               } else {
+                   queue.poll();
+               }
+           } else {
+               if(s.charAt(i) == '(') {
+                   queue.add(s.charAt(i));
+               } else {
+                   return false;
+               }
+           }
+       }
+    
+        return queue.isEmpty();
     }
 }
