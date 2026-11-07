@@ -2,39 +2,34 @@ import java.util.*;
 
 class Solution {
     public int[] solution(String[] genres, int[] plays) {
-        // 장르 별 총 재생횟수
-        Map<String, Integer> genresPlayCount = new HashMap<>();
-        // 장르 별 노래 리스트
-        Map<String, List<Song>> genresSong = new HashMap<>();
-        
+        Map<String, Integer> playCountMap = new HashMap<>();
+        Map<String, List<Integer>> songMap = new HashMap<>();
         for(int i = 0; i < genres.length; i++) {
-            genresPlayCount.put(genres[i], genresPlayCount.getOrDefault(genres[i], 0) + plays[i]);
-            genresSong.computeIfAbsent(genres[i], s -> new ArrayList<>()).add(new Song(i, plays[i]));
+            playCountMap.put(genres[i], playCountMap.getOrDefault(genres[i], 0) + plays[i]);
+            songMap.putIfAbsent(genres[i], new ArrayList<>());
+            songMap.get(genres[i]).add(i);
         }
-        
-        List<String> sortedGenre = new ArrayList<>(genresPlayCount.keySet());
-        sortedGenre.sort((a, b) -> genresPlayCount.get(b) - genresPlayCount.get(a));
-        
-        List<Integer> result = new ArrayList<>();
-        for(String genre : sortedGenre) {
-            List<Song> songs = genresSong.get(genre);
-            songs.sort((a, b) -> b.playCount == a.playCount? a.index - b.index : b.playCount - a.playCount);
-            
-            for (int i = 0; i < Math.min(2, songs.size()); i++) {
-                result.add(songs.get(i).index);
+
+        for(String genre : songMap.keySet()) {
+            songMap.get(genre).sort((a, b) -> {
+                if(plays[a] == plays[b]) {
+                    return Integer.compare(a, b);
+                }
+
+                return Integer.compare(plays[b], plays[a]);
+            });
+        }
+
+        List<String> genreList = new ArrayList<>(playCountMap.keySet());
+        genreList.sort((a, b) -> Integer.compare(playCountMap.get(b), playCountMap.get(a)));
+
+        List<Integer> returnList = new ArrayList<>();
+        for(String genre : genreList) {
+            for(int i = 0; i < Math.min(2, songMap.get(genre).size()); i++) {
+                returnList.add(songMap.get(genre).get(i));
             }
         }
-        
-        return result.stream().mapToInt(i -> i).toArray();
-    }
-}
 
-class Song {
-    int index;
-    int playCount;
-    
-    Song(int index, int playCount) {
-        this.index = index;
-        this.playCount = playCount;
+        return returnList.stream().mapToInt(Integer::intValue).toArray();
     }
 }
